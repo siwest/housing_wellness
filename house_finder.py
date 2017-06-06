@@ -20,8 +20,8 @@ with open('est15ALL.csv', 'r') as csvfile:
         try:
             median_income = float(row['Median Household Income']
                                   .replace(",", ""))
-            except ValueError:  # Some period found in original data
-                median_income = 0
+        except ValueError:  # Some period found in original data
+            median_income = 0
         income_dict[state + '_' + county] = median_income
 
 home_dict = {}
@@ -30,6 +30,7 @@ with open('County_Zhvi_Summary_AllHomes.csv', 'r') as csvfile:
     for row in zhvi_reader:
         state = row['State']
         county = row['RegionName']
+        region_id = row['RegionID']
         zhvi = float(row['Zhvi'].replace(",", ""))
         home_dict[state + '_' + county] = zhvi
 
