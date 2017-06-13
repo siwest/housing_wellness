@@ -1,9 +1,12 @@
 This is Python script that works with 2015 U.S. Census CSV data and recent Zillow data dump on median home prices. The purpose of this project is to understand the relationship between median income and median home sales in US counties and cities. It's difficult to determine where in this country your family's dollar goes the furthest, and this project attempts answer that.
 
-To that end, we use Zillow's home value index  to derive a Wellness Index for each city and state. 
+He is the source data used in this project so far:
+ -http://files.zillowstatic.com/research/public/County/County_Zhvi_Summary_AllHomes.csv
+ -https://www.census.gov/did/www/saipe/downloads/estmod15/index.html
+
+To evaluate where a family's dollar goes first, we use Zillow's home value index to derive a Wellness Index for each city and state. 
 
 Wellness Index = Zillow Home Value Index / median income
-
 
 The output like this:
 
