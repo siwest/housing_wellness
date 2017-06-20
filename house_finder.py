@@ -6,7 +6,7 @@ from pyzillow.pyzillow import ZillowWrapper, GetUpdatedPropertyDetails
 Project by: Sarah West
 
 Overview: This is a basic attempt to understand the relationship between median
-income and median home sales. 
+income and median home sales.
 
 """
 
@@ -23,7 +23,7 @@ with open('est15ALL.csv', 'r') as csvfile:
                                   .replace(",", ""))
         except ValueError:  # Some period found in original data
             median_income = 0
-        income_dict[state + '_' + county] = median_income
+        income_dict[state] = median_income
 
 home_dict = {}
 with open('County_Zhvi_Summary_AllHomes.csv', 'r') as csvfile:
@@ -39,12 +39,13 @@ with open('County_Zhvi_Summary_AllHomes.csv', 'r') as csvfile:
         #r = requests.get(url, params=query)
         #print(r.json())
 
-        home_dict[state + '_' + county] = zhvi
+        home_dict[state] = zhvi
 
 match_list = []
+
 for k, v in income_dict.items():
     if k in home_dict:
         my_wellness_index = home_dict[k] / v
         match_list.append((k, my_wellness_index))
-        
+
 print(sorted(match_list, key=lambda x: x[1]))
