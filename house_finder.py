@@ -1,5 +1,6 @@
 import csv
 import requests
+
 from pyzillow.pyzillow import ZillowWrapper, GetUpdatedPropertyDetails
 
 """
@@ -9,6 +10,22 @@ Overview: This is a basic attempt to understand the relationship between median
 income and median home sales.
 
 """
+
+def set_mpl_options():
+   mpl.rcParams['legend.fancybox'] = True
+   mpl.rcParams['legend.shadow'] = True
+   mpl.rcParams['legend.framealpha'] = 0.7
+
+import matplotlib.cbook as cbook
+import pandas as pd
+import matplotlib.pyplot as plt
+from dautil import options
+import matplotlib as mpl
+from dautil import plotting
+import seaborn as sns
+
+data = cbook.get_sample_data('est15ALL.csv', asfileobj=True)
+df = pd.read_csv(data, parse_dates=True, index_col=0)
 
 wsid_secret = ""
 
@@ -42,10 +59,23 @@ with open('County_Zhvi_Summary_AllHomes.csv', 'r') as csvfile:
         home_dict[state] = zhvi
 
 match_list = []
-
 for k, v in income_dict.items():
     if k in home_dict:
         my_wellness_index = home_dict[k] / v
         match_list.append((k, my_wellness_index))
+
+# Apply feature scaling
+my_sum = 0
+my_min = 0
+my_max = 0
+
+for elem in match_list:
+    my_sum += elem[1]
+    my_min = min(my_min, elem)
+    my_max = max(max, elem)
+
+
+for state, i in match_list.items():
+  i = (mean - i)**2 / range
 
 print(sorted(match_list, key=lambda x: x[1]))
